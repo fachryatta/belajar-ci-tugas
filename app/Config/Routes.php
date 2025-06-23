@@ -15,6 +15,7 @@ $routes->get('/', 'Home::index', ['filter' => 'auth']);
 
 $routes->get('faq', 'FaqController::index', ['filter' => 'auth']);
 $routes->get('contact', 'ContactController::index', ['filter' => 'auth']);
+$routes->get('kategori', 'KategoriController::index', ['filter' => 'auth']);
 
 $routes->group('produk', ['filter' => 'auth'], function ($routes) { 
     $routes->get('', 'ProdukController::index');
