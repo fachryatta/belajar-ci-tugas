@@ -21,7 +21,7 @@ class KategoriController extends BaseController
         return view('v_kategori', $data);
     }
 
-    public function create()
+    public function store()
     {
         $dataForm = [
             'nama' => $this->request->getPost('nama'),

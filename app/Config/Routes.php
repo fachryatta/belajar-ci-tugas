@@ -15,7 +15,15 @@ $routes->get('/', 'Home::index', ['filter' => 'auth']);
 
 $routes->get('faq', 'FaqController::index', ['filter' => 'auth']);
 $routes->get('contact', 'ContactController::index', ['filter' => 'auth']);
-$routes->get('kategori', 'KategoriController::index', ['filter' => 'auth']);
+
+$routes->group('kategori', function($routes) {
+    $routes->get('/', 'KategoriController::index');                // Tampilkan semua kategori
+    $routes->get('create', 'KategoriController::create');          // Tampilkan form tambah kategori
+    $routes->post('store', 'KategoriController::store');           // Proses simpan kategori baru
+    $routes->post('edit/(:any)', 'KategoriController::edit/$1');    // Tampilkan form edit kategori
+    $routes->post('update/(:any)', 'KategoriController::update/$1'); // Proses update kategori
+    $routes->get('delete/(:any)', 'KategoriController::delete/$1'); // Hapus kategori
+});
 
 $routes->group('produk', ['filter' => 'auth'], function ($routes) { 
     $routes->get('', 'ProdukController::index');

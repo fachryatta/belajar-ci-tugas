@@ -76,7 +76,7 @@
 <div class="modal fade" id="modalTambah" tabindex="-1">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form action="<?= base_url('kategori/create') ?>" method="post">
+            <form action="<?= base_url('kategori/store') ?>" method="post">
                 <div class="modal-header">
                     <h5 class="modal-title">Tambah Kategori</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
