@@ -50,3 +50,13 @@ $routes->get('get-cost', 'TransaksiController::getCost', ['filter' => 'auth']);
 $routes->get('profile', 'Home::profile', ['filter' => 'auth']);
 
 $routes->resource('api', ['controller' => 'apiController']);
+
+$routes->group('diskon', ['filter' => 'auth'], function($routes) {
+    $routes->get('/', 'Diskon::index');
+    $routes->get('create', 'Diskon::create');
+    $routes->post('store', 'Diskon::store');
+    $routes->post('edit/(:any)', 'Diskon::edit/$1');
+    $routes->post('update/(:any)', 'Diskon::update/$1');
+    $routes->post('delete/(:any)', 'Diskon::delete/$1');
+});
+

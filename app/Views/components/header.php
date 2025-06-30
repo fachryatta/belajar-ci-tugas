@@ -1,5 +1,5 @@
 <!-- ======= Header ======= -->
-<header id="header" class="header fixed-top d-flex align-items-center">
+ <header id="header" class="header fixed-top d-flex align-items-center">
 
 <div class="d-flex align-items-center justify-content-between">
   <a href="/" class="logo d-flex align-items-center">
@@ -15,6 +15,19 @@
     <button type="submit" title="Search"><i class="bi bi-search"></i></button>
   </form>
 </div><!-- End Search Bar -->
+
+<?php
+// Check if the $diskonHariIni variable is set
+if (isset($diskonHariIni)) :
+?>
+  <div class="alert alert-success mt-2">
+    <!-- Display the discount nominal, formatted as a number without decimals and with a comma separator for thousands -->
+    Hari ini ada diskon <?= number_format($diskonHariIni['nominal'], 0, ',', '.') ?> per item
+  </div>
+<?php
+endif;
+?>
+
 
 <nav class="header-nav ms-auto">
   <ul class="d-flex align-items-center">
