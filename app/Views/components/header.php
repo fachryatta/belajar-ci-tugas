@@ -20,7 +20,7 @@
 // Check if the $diskonHariIni variable is set
 if (isset($diskonHariIni)) :
 ?>
-  <div class="alert alert-success mt-2">
+  <div class="alert alert-success mt-3 text-center">
     <!-- Display the discount nominal, formatted as a number without decimals and with a comma separator for thousands -->
     Hari ini ada diskon <?= number_format($diskonHariIni['nominal'], 0, ',', '.') ?> per item
   </div>

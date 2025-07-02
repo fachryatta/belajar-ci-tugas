@@ -60,3 +60,7 @@ $routes->group('diskon', ['filter' => 'auth'], function($routes) {
     $routes->post('delete/(:any)', 'Diskon::delete/$1');
 });
 
+$routes->get('pembelian', 'PembelianController::index');
+$routes->get('pembelian/ubahStatus/(:num)', 'PembelianController::ubahStatus/$1');
+$routes->get('pembelian/detail/(:num)', 'TransaksiController::detail/$1');
+

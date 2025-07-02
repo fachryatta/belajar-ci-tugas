@@ -1,6 +1,9 @@
 # Toko Online CodeIgniter 4
 
-Proyek ini adalah platform toko online yang dibangun menggunakan [CodeIgniter 4](https://codeigniter.com/). Sistem ini menyediakan beberapa fungsionalitas untuk toko online, termasuk manajemen produk, keranjang belanja, dan sistem transaksi.
+Proyek ini adalah platform toko online yang dibangun menggunakan [CodeIgniter 4](https://codeigniter.com/).  
+Sistem ini menyediakan berbagai fungsionalitas untuk mendukung toko online, termasuk manajemen produk, keranjang belanja, transaksi, serta dashboard toko berbasis API.
+
+---
 
 ## Daftar Isi
 
@@ -8,33 +11,63 @@ Proyek ini adalah platform toko online yang dibangun menggunakan [CodeIgniter 4]
 - [Persyaratan Sistem](#persyaratan-sistem)
 - [Instalasi](#instalasi)
 - [Struktur Proyek](#struktur-proyek)
+- [Webservice API](#webservice-api)
+
+---
 
 ## Fitur
 
-- Katalog Produk
+- **Katalog Produk**
   - Tampilan produk dengan gambar
+  - Deskripsi, harga, dan stok produk
   - Pencarian produk
-- Keranjang Belanja
-  - Tambah/hapus produk
+
+- **Keranjang Belanja**
+  - Tambah/hapus produk ke keranjang
   - Update jumlah produk
-- Sistem Transaksi
-  - Proses checkout
-  - Riwayat transaksi
-- Panel Admin
+  - Hitung subtotal, ongkir, dan grand total
+
+- **Sistem Transaksi**
+  - Proses checkout dengan input alamat pengiriman
+  - Pilihan ongkos kirim (ongkir)
+  - Simpan transaksi ke database
+  - Melihat riwayat transaksi
+  - Melihat detail transaksi
+  - Status transaksi (Sudah Selesai / Belum Selesai)
+
+- **Panel Admin**
   - Manajemen produk (CRUD)
   - Manajemen kategori
   - Laporan transaksi
-  - Export data ke PDF
-- Sistem Autentikasi
-  - Login/Register pengguna
+  - Export laporan transaksi ke PDF
+  - Dashboard admin menampilkan statistik transaksi
+
+- **Sistem Autentikasi**
+  - Login / Register pengguna
   - Manajemen akun
-- UI Responsif dengan NiceAdmin template
+  - Role admin dan customer
+
+- **Dashboard Toko via Webservice**
+  - Menampilkan daftar transaksi pembelian:
+    - No
+    - Username
+    - Alamat
+    - Total Harga
+    - Ongkir
+    - Jumlah Item
+    - Status transaksi (Sudah / Belum berhasil)
+    - Tanggal transaksi
+  - Mengambil data dari API backend menggunakan CURL
+
+---
 
 ## Persyaratan Sistem
 
 - PHP >= 8.2
 - Composer
-- Web server (XAMPP)
+- Web Server (XAMPP / Laragon / Apache)
+- MySQL / MariaDB
+- Node.js (jika compile asset NiceAdmin)
 
 ## Instalasi
 

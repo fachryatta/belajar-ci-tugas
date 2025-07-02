@@ -42,6 +42,13 @@
             </li>
 
             <li class="nav-item">
+                <a class="nav-link collapsed" href="<?= base_url('pembelian') ?>">
+                <i class="bi bi-bag-check"></i>
+                <span>Pembelian</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
                 <a class="nav-link <?= (uri_string() == 'profile') ? "" : "collapsed" ?>" href="profile">
                     <i class="bi bi-person"></i>
                     <span>Profile</span>

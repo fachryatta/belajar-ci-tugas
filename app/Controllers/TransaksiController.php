@@ -33,12 +33,22 @@ class TransaksiController extends BaseController
 
     public function cart_add()
     {
+        $diskon = session()->get('diskon_hari_ini') ?? 0;
+        // Ambil harga awal dari form
+        $harga_awal = (int) $this->request->getPost('harga');
+
+        // Kurangi harga dengan diskon (tidak boleh negatif)
+        $harga_setelah_diskon = max($harga_awal - $diskon, 0);
         $this->cart->insert(array(
             'id'        => $this->request->getPost('id'),
             'qty'       => 1,
-            'price'     => $this->request->getPost('harga'),
+            'price'     => $harga_setelah_diskon,
             'name'      => $this->request->getPost('nama'),
-            'options'   => array('foto' => $this->request->getPost('foto'))
+            'options' => [
+                'foto'       => $this->request->getPost('foto'),
+                'harga_awal' => $harga_awal,
+                'diskon'     => $diskon
+            ]
         ));
         session()->setflashdata('success', 'Produk berhasil ditambahkan ke keranjang. (<a href="' . base_url() . 'keranjang">Lihat</a>)');
         return redirect()->to(base_url('/'));
@@ -155,12 +165,18 @@ public function buy()
 
         $last_insert_id = $this->transaction->getInsertID();
 
+        $diskon = session()->get('diskon_hari_ini') ?? 0;
+
         foreach ($this->cart->contents() as $value) {
+            $hargaAwal     = $value['options']['harga_awal'] ?? $value['price'];
+            $hargaDiskon   = max(0, $hargaAwal - $diskon);
+            $subtotal      = $hargaDiskon * $value['qty'];
             $dataFormDetail = [
                 'transaction_id' => $last_insert_id,
                 'product_id' => $value['id'],
                 'jumlah' => $value['qty'],
-                'diskon' => 0,
+                'diskon'          => $diskon,
+                'subtotal_harga'  => $subtotal,
                 'subtotal_harga' => $value['qty'] * $value['price'],
                 'created_at' => date("Y-m-d H:i:s"),
                 'updated_at' => date("Y-m-d H:i:s")
@@ -174,4 +190,18 @@ public function buy()
         return redirect()->to(base_url());
     }
 }
+
+    public function detail($id)
+    {
+        $transactionDetails = $this->transaction_detail
+        ->select('transaction_detail.*, product.nama, product.foto, product.harga AS harga_awal')
+        ->join('product', 'product.id = transaction_detail.product_id')
+        ->where('transaction_detail.transaction_id', $id)
+        ->findAll();
+
+        return view('v_detail_pembelian', [
+        'items' => $transactionDetails
+    ]);
+
+}   
 }
